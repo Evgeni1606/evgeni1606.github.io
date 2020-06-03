@@ -13,9 +13,16 @@
   </head>
   <body>
     <h1>CuWo</h1>
+    <form>
+      <label>Send a message from CuWo to PoS</label>
+      <input type="text" id="message-input" autofocus>
+      <button>Send Message</button>
+    </form>      
+    <p>Messages received by CuWo from PoS</p>
     <ul></ul>
   </body>
   <script>
+    var input = document.getElementById('message-input');
     var list = document.querySelector('ul');
     var port2;
     
@@ -33,7 +40,8 @@
       var listItem = document.createElement('li');
       listItem.textContent = e.data;
       list.appendChild(listItem);
-      port2.postMessage('Message received by PoS from CuWo: "' + e.data + ' transformed"');
+      port2.postMessage(input.value);
+      input.value = '';
     }
   </script>
 </html>
