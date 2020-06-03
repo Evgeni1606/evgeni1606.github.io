@@ -24,8 +24,27 @@
   <script>
     var input = document.getElementById('message-input');
     var list = document.querySelector('ul');
+    var button = document.querySelector('button');
     var port2;
     
+    // Wait for the iframe to load
+    window.addEventListener("load", onLoad);
+    
+    function onLoad() {
+      // Listen for button clicks
+      button.addEventListener('click', onClick);
+      // Listen for messages on port2
+      port2 = e.ports[0];
+      port2.onmessage = onMessage;      
+    }
+
+    // Post a message on port1 when the button is clicked
+    function onClick(e) {
+      e.preventDefault();
+      port2.postMessage(input.value);
+    }   
+    
+/*
     // Listen for the intial port transfer message
     window.addEventListener('message', initPort);
 
@@ -34,7 +53,7 @@
       port2 = e.ports[0];
       port2.onmessage = onMessage;
     }
-
+*/
     // Handle messages received on port2
     function onMessage(e) {
       var listItem = document.createElement('li');
