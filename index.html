@@ -46,14 +46,14 @@
     function onClick(e) {
       e.preventDefault();
       port1.postMessage(input.value);
+      input.value = '';
     }
 
     // Handle messages received on port1
     function onMessage(e) {
       var listItem = document.createElement('li');
       listItem.textContent = e.data;
-      list.appendChild(listItem);      
-      input.value = '';
+      list.appendChild(listItem);            
     }
   </script>
 </html>
