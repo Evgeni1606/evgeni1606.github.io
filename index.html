@@ -12,21 +12,20 @@
     <![endif]-->
   </head>
   <body>
-    <h1>PoS</h1>
-    <p id="message-output">Message not yet sent</p>
-
+    <h1>PoS</h1>    
     <form>
-      <label for="message-input">Send a message from PoS to CuWo</label>
+      <label>Send a message from PoS to CuWo</label>
       <input type="text" id="message-input" autofocus>
       <button>Send Message</button>
     </form>
-
-    <iframe src="page2.html" width='480' height='320' style="background-color: yellow;"></iframe>
+    <iframe src="page2.html" width='480' height='320' style="background-color: yellow;"></iframe>    
+    <label>Messages received by PoS from CuWo</label>
+    <ul></ul>
   </body>
   <script>
     var input = document.getElementById('message-input');
-    var output = document.getElementById('message-output');
     var button = document.querySelector('button');
+    var list = document.querySelector('ul');
     var iframe = document.querySelector('iframe');
     var channel = new MessageChannel();
     var port1 = channel.port1;
@@ -51,7 +50,9 @@
 
     // Handle messages received on port1
     function onMessage(e) {
-      output.innerHTML = e.data;
+      var listItem = document.createElement('li');
+      listItem.textContent = e.data;
+      list.appendChild(listItem);      
       input.value = '';
     }
   </script>
